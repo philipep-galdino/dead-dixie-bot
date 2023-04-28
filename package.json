@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "start": "tsc && node ./dist/index.js",
+    "dev": "nodemon --watch src --ext ts --exec ts-node ./src/index.ts"
+  },
+  "dependencies": {
+    "@types/node": "^18.15.11",
+    "basic-ftp": "^5.0.2",
+    "discord.js": "^13.1.0",
+    "dotenv": "^16.0.3",
+    "ftp": "^0.3.10",
+    "rcon-client": "^4.2.3",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  },
+  "devDependencies": {
+    "@types/ftp": "^0.3.33",
+    "nodemon": "^2.0.22"
+  }
+}
