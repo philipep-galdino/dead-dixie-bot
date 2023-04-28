@@ -1,8 +1,10 @@
 {
   "scripts": {
-    "start": "tsc && node ./dist/index.js",
+    "build": "tsc",
+    "start": "node ./dist/index.js",
     "dev": "nodemon --watch src --ext ts --exec ts-node ./src/index.ts"
   },
+  
   "dependencies": {
     "@types/node": "^18.15.11",
     "basic-ftp": "^5.0.2",
