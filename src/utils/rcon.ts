@@ -3,7 +3,7 @@ import { TextChannel } from 'discord.js';
 
 import { generatePassword } from './passwordGenerator';
 
-function getRconConfig() {
+export function getRconConfig() {
   return {
     host: process.env.RCON_IP_ADDRESS ?? '',
     port: parseInt(process.env.RCON_PORT ?? ''),
