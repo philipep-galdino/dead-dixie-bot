@@ -1,6 +1,9 @@
 import { Client, GuildMember, MessageEmbed, TextChannel } from 'discord.js';
+
 import { Event } from '../types';
+
 import { addWhitelistUser, removeWhitelistUser } from '../utils/rcon';
+import { cleanNickname } from '../utils/cleanUserNickname';
 
 const guildMemberUpdate: Event = {
   name: 'guildMemberUpdate',
@@ -18,12 +21,22 @@ const guildMemberUpdate: Event = {
     }
 
     const userNickname = newMember.nickname || newMember.user.username;
+    const cleanedUserNickname = cleanNickname(userNickname);
 
     if (!oldRoles.has(specificRoleId) && newRoles.has(specificRoleId)) {
-        console.log(`Role added to user: ${newMember.user.tag}`);
-  
         try {
-          const generatedPassword = await addWhitelistUser(userNickname, channel);
+          await newMember.setNickname(cleanedUserNickname);
+        } catch (error) {
+          console.error(`Error setting nickname for user ${cleanedUserNickname}(${newMember.user.tag}):`, error);
+        }
+
+        console.log(`Role added to user: ${cleanedUserNickname}(${newMember.user.tag})`);
+
+        try {
+          const generatedPassword = await addWhitelistUser(cleanedUserNickname, channel);
+
+          channel.send(`User ${cleanedUserNickname}(${newMember.user.tag}) added to the whitelist.`);
+
   
           const embed = new MessageEmbed()
           .setTitle('Informações da Whitelist')
@@ -31,7 +44,7 @@ const guildMemberUpdate: Event = {
             `Você foi adicionado à whitelist do Dead Dixie! Estamos no Ato 1. Segue suas credenciais:`
           )
           .addFields(
-            { name: 'User', value: userNickname },
+            { name: 'User', value: cleanedUserNickname },
             { name: 'Password', value: generatedPassword }
           )
           .setFooter({ text: 'Mantenha essa informação segura e não compartilhe com NINGUÉM.' });
@@ -39,7 +52,7 @@ const guildMemberUpdate: Event = {
           await newMember.user.send({ embeds: [embed] });
         } catch (error) {
           console.error(error);
-          channel.send(`Error adding user ${userNickname} to the whitelist.`);
+          channel.send(`Error adding user ${cleanedUserNickname}(${newMember.user.tag}) to the whitelist.`);
         }
     } else if (oldRoles.has(specificRoleId) && !newRoles.has(specificRoleId)) {
         console.log(`Role removed from user: ${newMember.user.tag}`);
