@@ -1,4 +1,5 @@
 import { Rcon } from 'rcon-client';
+import { TextChannel } from 'discord.js';
 
 import { generatePassword } from './passwordGenerator';
 
@@ -10,7 +11,7 @@ function getRconConfig() {
   };
 }
 
-export async function addWhitelistUser(user: string, retries = 5): Promise<string> {
+export async function addWhitelistUser(user: string, channel: TextChannel, retries = 5): Promise<string> {
   const rcon = new Rcon(getRconConfig());
   const generatedPassword = generatePassword();
 
@@ -18,6 +19,9 @@ export async function addWhitelistUser(user: string, retries = 5): Promise<strin
     try {
       await rcon.connect();
       await rcon.send(`/adduser ${user} ${generatedPassword}`);
+
+      channel.send(`User ${user} added to the whitelist.`);
+
       break; // success, exit the loop
     } catch (error) {
       console.error('Error while adding user to whitelist:', error);
