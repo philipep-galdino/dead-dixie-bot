@@ -23,8 +23,7 @@ const guildMemberUpdate: Event = {
         console.log(`Role added to user: ${newMember.user.tag}`);
   
         try {
-          const generatedPassword = await addWhitelistUser(userNickname);
-          channel.send(`User ${userNickname} added to the whitelist.`);
+          const generatedPassword = await addWhitelistUser(userNickname, channel);
   
           const embed = new MessageEmbed()
           .setTitle('Informações da Whitelist')
@@ -37,7 +36,7 @@ const guildMemberUpdate: Event = {
           )
           .setFooter({ text: 'Mantenha essa informação segura e não compartilhe com NINGUÉM.' });
         
-        await newMember.user.send({ embeds: [embed] });
+          await newMember.user.send({ embeds: [embed] });
         } catch (error) {
           console.error(error);
           channel.send(`Error adding user ${userNickname} to the whitelist.`);
