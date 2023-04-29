@@ -8,6 +8,8 @@ import { cleanNickname } from '../utils/cleanUserNickname';
 const guildMemberUpdate: Event = {
   name: 'guildMemberUpdate',
   execute: async (client: Client, oldMember: GuildMember, newMember: GuildMember) => {
+    console.log(`guildMemberUpdate event triggered for user: ${newMember.user.tag}`);
+    
     const specificRoleId = '1085947976075194400';
     const channelId = '1095099899235803324';
     const oldRoles = oldMember.roles.cache;
