@@ -32,7 +32,7 @@ const setaccesslevel: Command = {
         await rcon.connect();
 
         try {
-            await rcon.send(`/setaccesslevel "${player}" ${level}`);
+            await rcon.send(`setaccesslevel "${player}" ${level}`);
             message.channel.send(`Set access level of ${player} to ${level}.`);
         } catch (error) {
             console.error('Error executing Rcon command:', error);

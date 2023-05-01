@@ -33,7 +33,7 @@ const kickuser: Command = {
         await rcon.connect();
 
         try {
-            await rcon.send(`/kickuser "${player}" -r "${reason}"`);
+            await rcon.send(`kickuser "${player}" -r "${reason}"`);
             message.channel.send(`Kicked ${player} for: ${reason}`);
         } catch (error) {
             console.error('Error executing Rcon command:', error);

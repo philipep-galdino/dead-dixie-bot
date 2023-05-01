@@ -8,6 +8,7 @@ const players: Command = {
     name: 'players',
     description: 'Lista todos os usuários conectados!',
     execute: async (message: Message) => {
+        console.log('yeoba')
         const requiredRoleID = '1085755248557162578';
 
         if (!message.member) {
@@ -24,7 +25,7 @@ const players: Command = {
         await rcon.connect();
 
         try {
-            const response = await rcon.send('/players');
+            const response = await rcon.send('players');
             message.channel.send(`Jogadores online: ${response}`);
         } catch (error) {
             console.error('Error executing Rcon command:', error);

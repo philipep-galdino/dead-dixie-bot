@@ -34,10 +34,10 @@ const banUnban: Command = {
 
     try {
         if (action === 'ban') {
-        await rcon.send(`/banuser "${player}" -r "${reason}"`);
+        await rcon.send(`banuser "${player}" -r "${reason}"`);
         message.channel.send(`Banned ${player} for: ${reason}`);
         } else if (action === 'unban') {
-        await rcon.send(`/unbanuser "${player}"`);
+        await rcon.send(`unbanuser "${player}"`);
         message.channel.send(`Unbanned ${player}.`);
         } else {
         message.channel.send('Ação inválida. Utilize "ban" ou "unban".');

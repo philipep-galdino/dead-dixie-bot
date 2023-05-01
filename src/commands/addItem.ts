@@ -33,7 +33,7 @@ const additem: Command = {
         await rcon.connect();
 
         try {
-            await rcon.send(`/additem "${player}" "${item}" ${count}`);
+            await rcon.send(`additem "${player}" "${item}" ${count}`);
             message.channel.send(`Setado ${count} ${item} to ${player}.`);
         } catch (error) {
             console.error('Error executing Rcon command:', error);

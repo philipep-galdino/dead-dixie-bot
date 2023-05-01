@@ -28,7 +28,7 @@ const teleport: Command = {
             return;
         }
 
-        const command = player2 ? `/teleport "${player1}" "${player2}"` : `/teleport "${player1}"`;
+        const command = player2 ? `teleport "${player1}" "${player2}"` : `/teleport "${player1}"`;
 
         const rcon = new Rcon(getRconConfig());
         await rcon.connect();

@@ -32,7 +32,7 @@ const addxp: Command = {
         await rcon.connect();
 
         try {
-            await rcon.send(`/addxp "${player}" ${xp}`);
+            await rcon.send(`addxp "${player}" ${xp}`);
             message.channel.send(`Added ${xp} to ${player}.`);
         } catch (error) {
             console.error('Error executing Rcon command:', error);

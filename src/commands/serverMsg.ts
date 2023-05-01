@@ -32,7 +32,7 @@ const servermsg: Command = {
             await rcon.connect();
     
             try {
-                await rcon.send(`/servermsg "${text}"`);
+                await rcon.send(`servermsg "${text}"`);
                 message.channel.send(`Broadcasted message: ${text}`);
             } catch (error) {
                 console.error('Error executing Rcon command:', error);
