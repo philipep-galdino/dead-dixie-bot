@@ -10,6 +10,8 @@ export function registerCommands(client: ExtendedClient, commandsFolder: string)
 
   for (const file of commandFiles) {
     const command: Command = require(path.join(__dirname, commandsFolder, file)).default;
+    console.log(`Registering command: ${command.name}`);
+
     client.commands.set(command.name, command);
   }
 }
