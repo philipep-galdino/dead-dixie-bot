@@ -6,8 +6,6 @@ const messageCreate: Event = {
   execute: async (client: ExtendedClient, message: Message) => {
     if (message.author.bot || !message.guild) return;
 
-    console.log(`Received message: ${message.content}`);
-
     const prefix = '!';
 
     if (!message.content.startsWith(prefix)) return;
